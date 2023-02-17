@@ -1,1 +1,2 @@
-module.exports = require('./app.js');
+const req = require('esm')(module);
+//module.exports = req('./app.js');
