@@ -6,7 +6,7 @@ import helmet from "helmet";
 export default class {
 
     static generatePort() {
-        return 3000;
+        return process.env.port || process.env.PORT || 3000;
     }
 
     static createApp(port, url = config.url) {
@@ -14,15 +14,15 @@ export default class {
 
         //SetUp
         //app.use(helmet());
-        app.set('case sensitive routing', false);
-        app.set('view engine', 'ejs');
+        //app.set('case sensitive routing', false);
+        //app.set('view engine', 'ejs');
 
         //Middleware
         app.use(express.urlencoded({extended: true}));
         app.use(express.json());
         app.use(cors({origin: url}));
         app.options('*', cors());
-        app.use(express.static('public'));
+        //app.use(express.static('public'));
 
         app.listen(port, () => {
             console.log('server up');
