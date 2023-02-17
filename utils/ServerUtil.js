@@ -6,7 +6,7 @@ import helmet from "helmet";
 export default class {
 
     static generatePort() {
-        return process.env.port || process.env.PORT || 3000;
+        return 3000;
     }
 
     static createApp(port, url = config.url) {
