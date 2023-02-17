@@ -14,15 +14,15 @@ export default class {
 
         //SetUp
         //app.use(helmet());
-        //app.set('case sensitive routing', false);
-        //app.set('view engine', 'ejs');
+        app.set('case sensitive routing', false);
+        app.set('view engine', 'ejs');
 
         //Middleware
         app.use(express.urlencoded({extended: true}));
         app.use(express.json());
         app.use(cors({origin: url}));
         app.options('*', cors());
-        //app.use(express.static('public'));
+        app.use(express.static('public'));
 
         app.listen(port, () => {
             console.log('server up');
