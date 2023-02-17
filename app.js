@@ -6,10 +6,6 @@ import config from './config.json';
 const port = ServerUtil.generatePort();
 const app = ServerUtil.createApp(port);
 
-//const connection = DatabaseUtil.createConnection();
+const connection = DatabaseUtil.createConnection();
 
-app.get('/', (req, res, next) =>{
-    res.send("Hallo");
-})
-
-//app.use('/', indexRouter);
+app.use('/', indexRouter);
