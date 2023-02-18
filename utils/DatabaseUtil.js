@@ -36,9 +36,10 @@ export default class {
      *
      * @param connection: sql2 Datenbank Connection
      */
-    static endConnection(connection){
+    static endConnection(connection) {
+        let id = connection.threadId;
         connection.destroy();
-        console.log("Verbindung mit der Datenbank getrennt");
+        console.log("Verbringung getrennt mit Datenbank unter id: " + id);
     }
 
     /**
@@ -48,7 +49,7 @@ export default class {
      * @param tableName: Name der Tabelle, in der Gesucht werden soll.
      * @param connection: sql2 Connection zur Datenbank
      * @param filter: Obejekt an Filtern nach denen gesucht wird, wenn nicht übergeben wird alles der Tabelle zurückgegeben
-     * @param logicOperator: So werden die Filter miteinander verbunden ("AND"/"OR"), wenn nichts übergeben "OR", wenn bei "OR" nichts gefunden wird, wird "AND" zurückgegeben
+     * @param logicOperator: So werden die Filter miteinander verbunden ("AND"/"OR"), wenn nichts übergeben "AND", wenn bei "AND" nichts gefunden wird, wird "OR" zurückgegeben
      * @returns {Promise<unknown>}: SQL-Data
      */
     static getDataByTable(tableName, connection, filter = {}, logicOperator = "") {
@@ -56,8 +57,8 @@ export default class {
 
             let testBoth = false;
 
-            if(logicOperator === ""){
-                logicOperator = "OR"
+            if (logicOperator === "") {
+                logicOperator = "AND"
                 testBoth = true;
             }
 
@@ -77,8 +78,7 @@ export default class {
             let data = null;
             try {
                 data = await this.getSQLData(sqlRequest, connection);
-                if(data.length === 0 && testBoth === true)
-                    data = await this.getDataByTable(tableName, connection, filter, (logicOperator === "OR")? "AND" : "OR");
+                if (data.length === 0 && testBoth === true) data = await this.getDataByTable(tableName, connection, filter, (logicOperator === "OR") ? "AND" : "OR");
                 resolve(data);
             } catch (err) {
                 reject(err)
