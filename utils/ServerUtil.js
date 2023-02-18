@@ -13,7 +13,7 @@ export default class {
         const app = express();
 
         //SetUp
-        //app.use(helmet());
+        app.use(helmet());
         app.set('case sensitive routing', false);
         app.set('view engine', 'ejs');
 
