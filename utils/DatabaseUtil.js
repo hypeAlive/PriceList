@@ -1,6 +1,7 @@
 import mysql from 'mysql2';
 import express from 'express';
 import config from '../config.json';
+import { v4 as uuid } from 'uuid';
 
 /**
  * Beinhaltet alle Funktionen zu einer Datenbank
@@ -100,4 +101,9 @@ export default class {
             });
         });
     }
+
+    static generateUUID(){
+        return uuid();
+    }
+
 }

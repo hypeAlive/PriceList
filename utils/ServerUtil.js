@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import config from "../config.json";
 import helmet from "helmet";
+import cookieParser from 'cookie-parser';
 
 export default class {
 
@@ -16,6 +17,7 @@ export default class {
         app.use(helmet());
         app.set('case sensitive routing', false);
         app.set('view engine', 'ejs');
+        app.use(cookieParser());
 
         //Middleware
         app.use(express.urlencoded({extended: true}));
